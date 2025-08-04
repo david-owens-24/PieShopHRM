@@ -15,5 +15,10 @@ namespace PieShopHRM.Components.Pages
         {
             Employee = MockDataService.Employees?.FirstOrDefault(e => e.EmployeeId == EmployeeId);
         }
+
+        private void ChangeHolidayState()
+        {
+            Employee.IsOnHoliday = !Employee.IsOnHoliday;
+        }
     }
 }
