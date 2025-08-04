@@ -6,7 +6,7 @@ namespace PieShopHRM.Components.Pages
 {
     public partial class EmployeeOverview
     {
-        public List<Employee>? Employees { get; set; }
+        public List<Employee>? Employees { get; set; } = null;
 
         protected async override Task OnInitializedAsync()
         {

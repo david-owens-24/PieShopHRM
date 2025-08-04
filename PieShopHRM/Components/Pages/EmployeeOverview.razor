@@ -1,31 +1,39 @@
 ﻿@page "/employeeoverview"
+@attribute [StreamRendering(true)]
 
 <h1>Employee Overview</h1>
 
-<table class="table table-light">
-    <thead class="table-primary">
-        <tr>
-            <th></th>
-            <th>Employee ID</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var employee in Employees)
-        {
+@if(Employees == null)
+{
+    <p>Loading employees...</p>
+}
+else
+{
+    <table class="table table-light">
+        <thead class="table-primary">
             <tr>
-                <td>
-                    <img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}.jpg")" alt="Employee Photo" class="rounded-circle" />
-                </td>
-                <td>@employee.EmployeeId</td>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
-                <td>
-                    <a href="@($"employee-details/{employee.EmployeeId}")" class="btn btn-primary">View Details</a>
-                </td>
+                <th></th>
+                <th>Employee ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var employee in Employees)
+            {
+                <tr>
+                    <td>
+                        <img src="@($"https://gillcleerenpluralsight.blob.core.windows.net/person/{employee.EmployeeId}.jpg")" alt="Employee Photo" class="rounded-circle" />
+                    </td>
+                    <td>@employee.EmployeeId</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>
+                        <a href="@($"employee-details/{employee.EmployeeId}")" class="btn btn-primary">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
