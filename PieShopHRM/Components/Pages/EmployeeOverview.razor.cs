@@ -1,4 +1,4 @@
-﻿using BethanysPieShopHRM.Shared.Domain;
+﻿using PieShopHRM.Shared.Domain;
 using PieShopHRM.Services;
 using System.Runtime.CompilerServices;
 
