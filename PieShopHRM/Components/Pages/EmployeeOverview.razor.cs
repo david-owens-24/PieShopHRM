@@ -8,9 +8,16 @@ namespace PieShopHRM.Components.Pages
     {
         public List<Employee>? Employees { get; set; } = null;
 
+        private Employee? _selectedEmployee = null;
+
         protected async override Task OnInitializedAsync()
         {
             Employees = MockDataService.Employees;
+        }
+
+        public void ShowQuickViewPopup(Employee employee)
+        {
+            _selectedEmployee = employee;
         }
     }
 }
