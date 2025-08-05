@@ -34,14 +34,9 @@ jobs:
 
     - name: Publish Blazor WebAssembly app
       run: dotnet publish "PieShopHRM.Wasm/PieShopHRM.Wasm.csproj" -c Release -o release --nologo
-
-    - name: Move files to expected location for GitHub Pages
-      run: |
-        mkdir public
-        cp -r release/wwwroot/* public/
-
+      
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        publish_dir: ./release/wwwroot
