@@ -1,4 +1,4 @@
-/* _content/PieShopHRM/Components/Layout/MainLayout.razor.rz.scp.css */
+/* PieShopHRM/Components/Layout/MainLayout.razor.rz.scp.css */
 .page[b-k8ynr56h5p] {
     position: relative;
     display: flex;
@@ -95,7 +95,7 @@ main[b-k8ynr56h5p] {
         right: 0.75rem;
         top: 0.5rem;
     }
-/* _content/PieShopHRM/Components/Layout/NavMenu.razor.rz.scp.css */
+/* PieShopHRM/Components/Layout/NavMenu.razor.rz.scp.css */
 .navbar-toggler[b-exdzew898a] {
     appearance: none;
     cursor: pointer;
