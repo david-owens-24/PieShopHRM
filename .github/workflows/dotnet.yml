@@ -25,11 +25,13 @@ jobs:
       name: Build      
       run: dotnet build --no-restore
 
+      # This will run the test step and collect data on results
     - id: test
       if: steps.build.outcome == 'success'
       name: Test
       run: dotnet test "PieShopHRM.Tests/PieShopHRM.Tests.csproj" --collect "XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
 
+      # This saves the test results and code coverage data
     - id: coverage
       name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
@@ -41,3 +43,17 @@ jobs:
         hide_complexity: true
         indicators: true
         output: console
+
+    - id: publish
+      name: Publish
+      run: dotnet publish "PieShopHRM/PieShopHRM.csproj" -c Release -o ./publish --self-contained -r linux-x64 /p:UseAppHost=true
+
+    - name: Zip Artifact
+      run: zip app.zip ./publish
+
+    - id: upload
+      name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: dotnet-webapp
+        path: app.zip
