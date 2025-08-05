@@ -1,0 +1,45 @@
+name: Deploy Blazor WASM to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Needed to push to gh-pages
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - id: build
+      name: Build
+      run: dotnet build --no-restore
+
+    - id: test
+      name: Test
+      run: dotnet test "PieShopHRM.Tests/PieShopHRM.Tests.csproj"
+
+    - name: Publish Blazor WebAssembly app
+      run: dotnet publish "PieShopHRM/PieShopHRM.csproj" -c Release -o release --nologo
+
+    - name: Move files to expected location for GitHub Pages
+      run: |
+        mkdir public
+        cp -r release/wwwroot/* public/
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
