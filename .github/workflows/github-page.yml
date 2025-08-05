@@ -36,7 +36,7 @@ jobs:
       run: dotnet publish "PieShopHRM.Wasm/PieShopHRM.Wasm.csproj" -c Release -o release --nologo
 
     - name: Rewrite base href for GitHub Pages
-      run: sed -i 's|<base href="/" />|<base href="/PieShopHRM/" />|' release/wwwroot/index.html
+      run: sed -i 's|<base href="/" />|<base href="/PieShopHRM/" />|' release/wwwroot/PieShopHRM/index.html
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
