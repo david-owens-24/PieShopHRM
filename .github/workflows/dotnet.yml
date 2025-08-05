@@ -57,3 +57,31 @@ jobs:
       with:
         name: dotnet-webapp
         path: app.zip
+
+
+  # Deploy job to deploy the application to Azure
+
+  # Only runs if the build job is successful
+  # Downloads the artifact created in the build job
+  # Logs into Azure using credentials stored in GitHub Secrets
+  # Deploys the application to Azure Web Apps
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: dotnet-webapp        
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: app-pieshophrm
+        package: app.zip  
