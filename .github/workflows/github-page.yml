@@ -30,10 +30,13 @@ jobs:
 
     - id: test
       name: Test
-      run: dotnet test "PieShopHRM.Tests/PieShopHRM.Tests.csproj"
+      run: dotnet test "PieShopHRM.Tests/PieShopHRM.Tests.csproj"    
 
     - name: Publish Blazor WebAssembly app
       run: dotnet publish "PieShopHRM.Wasm/PieShopHRM.Wasm.csproj" -c Release -o release --nologo
+
+    - name: Rewrite base href for GitHub Pages
+      run: sed -i 's|<base href="/" />|<base href="/PieShopHRM/" />|' release/wwwroot/index.html
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
