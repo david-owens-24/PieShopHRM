@@ -33,7 +33,7 @@ jobs:
       run: dotnet test "PieShopHRM.Tests/PieShopHRM.Tests.csproj"
 
     - name: Publish Blazor WebAssembly app
-      run: dotnet publish "PieShopHRM/PieShopHRM.csproj" -c Release -o release --nologo
+      run: dotnet publish "PieShopHRM.Wasm/PieShopHRM.Wasm.csproj" -c Release -o release --nologo
 
     - name: Move files to expected location for GitHub Pages
       run: |
